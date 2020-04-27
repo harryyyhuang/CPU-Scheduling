@@ -91,7 +91,7 @@ void load_queue(){
 // }
 
 
-void handleRR(processQueue& readyQueue, processInfo* process){
+void handleRR(processQueue* readyQueue, processInfo* process){
     if(!pushQueue(readyQueue, process){
         perror("ready queue out of bound");
         exit(1);
@@ -103,7 +103,7 @@ void handleRR(processQueue& readyQueue, processInfo* process){
 
 }
 
-void handlePSJF(processQueue& readyQueue, processInfo* process){
+void handlePSJF(processQueue* readyQueue, processInfo* process){
     if(!insertQueue(readyQueue, process){
         perror("ready queue out of bound");
         exit(1);
@@ -149,13 +149,13 @@ void scheduler(){
         for(int i = finishNum; i < processNum; i++){
             if (processList[i].ready_time == ntime){
                 if(policy == SJF || policy == PSJF){
-                    if(!insertQueue(readyQueue, &processList[i])){
+                    if(!insertQueue(&readyQueue, &processList[i])){
                         perror("ready queue out of bound");
                         exit(1);
                     }
                 }
                 else{
-                    if(!pushQueue(readyQueue, &processList[i])){
+                    if(!pushQueue(&readyQueue, &processList[i])){
                         perror("ready queue out of bound");
                         exit(1);
                     }
@@ -182,14 +182,14 @@ void scheduler(){
             // if policy is RR then should check the time slice
             // and let the handleRR handle it HAHA~
             else if(policy == RR && ntime%500 == 0){
-                handleRR(runningProcess, readyQueue);
+                handleRR(runningProcess, &readyQueue);
                 runningProcess = 0 ;
             }
 
             // if policy is PSJF then should check if the process
             // is to be preempted
-            else if(policy == PSJF && isPreempt(readyQueue, runningProcess)){
-                handlePSJF(runningProcess, readyQueue);
+            else if(policy == PSJF && isPreempt(&readyQueue, runningProcess)){
+                handlePSJF(runningProcess, &readyQueue);
                 runningProcess = 0 ;
             }
         }
@@ -199,7 +199,7 @@ void scheduler(){
         // if process had been postponed then resume it
         if(!runningProcess){
             if(!emptyQueue(readyQueue)){
-                processInfo* toExecProcess = pullQueue(readyQueue);
+                processInfo* toExecProcess = pullQueue(&readyQueue);
                 if(toExecProcess->pid == -1){
                     toExecProcess->pid = process_execute(toExecProcess);
                 }

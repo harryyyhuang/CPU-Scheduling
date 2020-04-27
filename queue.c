@@ -15,11 +15,11 @@ processQueue initQueue(int ProcNum){
 }
 
 // push the process into the ready queue for execution
-bool pushQueue(processQueue &readyQueue, processInfo* ready){
-    if(readyQueue.num < readyQueue.maxNum){
-        readyQueue.processes[readyQueue.in] = ready ;
-        readyQueue.in = (readyQueue.in + 1) % readyQueue.maxNum ;
-        ++readyQueue.num                    ;
+bool pushQueue(processQueue* readyQueue, processInfo* ready){
+    if(readyQueue->num < readyQueue->maxNum){
+        readyQueue->processes[readyQueue->in] = ready ;
+        readyQueue->in = (readyQueue->in + 1) % readyQueue->maxNum ;
+        ++readyQueue->num                    ;
 
         return true;
     }
@@ -27,26 +27,26 @@ bool pushQueue(processQueue &readyQueue, processInfo* ready){
 }
 
 // insert the process into the ready queue by its execution time
-bool insertQueue(processQueue& readyQueue, processInfo* ready){
-    if(readyQueue.num < readyQueue.maxNum){
-        int insertIndex = readyQueue.out ;
+bool insertQueue(processQueue* readyQueue, processInfo* ready){
+    if(readyQueue->num < readyQueue->maxNum){
+        int insertIndex = readyQueue->out ;
         while (1)
         {
-            if(ready->execution_time < readyQueue.processes[insertIndex]->execution_time){
+            if(ready->execution_time < readyQueue->processes[insertIndex]->execution_time){
                 pushBackAll(readyQueue, ready, insertIndex);
                 break;
             }
             else{
-                insertIndex = (insertIndex + 1) % readyQueue.maxNum ;
+                insertIndex = (insertIndex + 1) % readyQueue->maxNum ;
             }
 
-            if(insertIndex == readyQueue.in){
-                readyQueue.processes[insertIndex] = ready;
+            if(insertIndex == readyQueue->in){
+                readyQueue->processes[insertIndex] = ready;
                 break;
             }
         }
-        readyQueue.in = (readyQueue.in + 1) % readyQueue.maxNum ;
-        ++readyQueue.num                    ;
+        readyQueue->in = (readyQueue->in + 1) % readyQueue->maxNum ;
+        ++readyQueue->num                    ;
 
         return true;
     }
@@ -60,32 +60,32 @@ bool emptyQueue(processQueue readyQueue){
 }
 
 // pull the first process in the queue
-processInfo* pullQueue(processQueue& readyQueue){
-    processInfo* temprocess = readyQueue.processes[readyQueue.out];
-    readyQueue.out = (readyQueue.out + 1) % maxNum ;
-    --readyQueue.num                               ;
+processInfo* pullQueue(processQueue* readyQueue){
+    processInfo* temprocess = readyQueue->processes[readyQueue->out];
+    readyQueue->out = (readyQueue->out + 1) % maxNum ;
+    --readyQueue->num                               ;
 
     return temprocess;
 }
 
 // recursively push back all the process until inserIndex reach the queue's in
 // which mean no other should be push back
-void pushBackAll(processQueue& readyQueue, processInfo* ready, int insertIndex){
-    processes* tmpprocess = readyQueue.processes[insertIndex] ;
-    readyQueue.processes[insertIndex] = ready ;
-    insertIndex = (insertIndex + 1) % readyQueue.maxNum ;
+void pushBackAll(processQueue* readyQueue, processInfo* ready, int insertIndex){
+    processes* tmpprocess = readyQueue->processes[insertIndex] ;
+    readyQueue->processes[insertIndex] = ready ;
+    insertIndex = (insertIndex + 1) % readyQueue->maxNum ;
     pushBackAll(readyQueue, tmpprocess, insertIndex) ;
-    if(insertIndex == readyQueue.in) return ;
+    if(insertIndex == readyQueue->in) return ;
 }
 
 // check if the running process should be preempt by checking the queue's
 // first element's execution time, if smaller than running process's 
 // execution time then it should be preempt. if queue is empty then 
 // there's noting to preempt
-bool isPreempt(processQueue& readyQueue, processInfo* runningProcess){
-    if(emptyQueue(readyQueue)) return false ;
+bool isPreempt(processQueue* readyQueue, processInfo* runningProcess){
+    if(emptyQueue(*readyQueue)) return false ;
 
-    if(readyQueue.processes[readyQueue.out]->execution_time < runningProcess->execution_time) return true;
+    if(readyQueue->processes[readyQueue->out]->execution_time < runningProcess->execution_time) return true;
 
     return false;
 }
