@@ -1,4 +1,4 @@
-FLAG = -DDEBUG -Wall -g 
+FLAG = -DDEBUG -Wall -g -std=c99
 
 main: main.o scheduler.o process.o queue.o
 	gcc $(FLAG) main.o scheduler.o process.o queue.o
