@@ -48,3 +48,5 @@
     sigfillset(&act.sa_mask);                               \
     sigaction(SIGCHLD, &act, NULL);                         \
 } while(0)
+
+#endif
