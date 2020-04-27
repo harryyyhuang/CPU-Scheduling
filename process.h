@@ -3,13 +3,13 @@
 
 #include <sys/types.h>
 
-struct processInfo
+typedef struct processInfo
 {
     char name[33];
     int  ready_time   ;
     int  execution_time;
     pid_t pid    ;
-};
+}processInfo;
 
 // running one unit of time
 #define UNIT_TIME() do{                    \
@@ -19,18 +19,18 @@ struct processInfo
 
 
 // fork the porcess and execute it 
-int process_execute(processInfo* process);
+int process_execute(struct processInfo* process);
 
 // check if the current process is ended
-bool processEnd(processInfo* runningProcess);                                      
+bool processEnd(struct processInfo* runningProcess);                                      
 
 // execute the process
-void execprocess(processInfo* runningProcess);
+void execprocess(struct processInfo* runningProcess);
 
 // postpone the process to let other run first
-void posponeProcess(processInfo* process);
+void posponeProcess(struct processInfo* process);
 
 // resume the process that has been postpone
-void resumeProcess(processInfo* process);
+void resumeProcess(struct processInfo* process);
 
 #endif

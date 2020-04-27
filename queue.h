@@ -3,14 +3,14 @@
 
 #include "process.h"
 
-struct processQueue
+typedef struct processQueue
 {
     struct processInfo** processes;
     int    in     ;
     int    out    ;
     int    num    ;
     int    maxNum ;
-};
+}processQueue;
 
 // initialize the processQueue
 processQueue initQueue(int ProcNum);

@@ -3,7 +3,7 @@
 #include "cpucontrol.h"
 
 
-int process_execute(processInfo* process){
+int process_execute(struct processInfo* process){
     pid_t pid = fork();
 
     // pid == -1 means fail to fork
@@ -41,18 +41,18 @@ int process_execute(processInfo* process){
 // check if the executing time of process has reach the process's
 // given execution time, and reutrn true as it end, otherwise return 
 // false
-bool processEnd(processInfo* runningProcess){
+bool processEnd(struct processInfo* runningProcess){
     if(runningProcess->execution_time == 0) return true;
     else return false;
 }
 
 // add the process executing time as the process is being executed
-void execprocess(processInfo* runningProcess){
+void execprocess(struct processInfo* runningProcess){
     --runningProcess->execution_time;
 }
 
 // stop the running process
-void posponeProcess(processInfo* process){
+void posponeProcess(struct processInfo* process){
     if(SET_PRIORITY(process->pid, SCHED_IDLE, 0) < 0){
         perror("postpone process fail");
         exit(1);
@@ -60,7 +60,7 @@ void posponeProcess(processInfo* process){
 }
 
 // resume the process
-void resumeProcess(processInfo* process){
+void resumeProcess(struct processInfo* process){
     if(SET_PRIORITY(process->pid, SCHED_FIFO, PRIORITY_HIGH)) < 0){
         perror("postpone process fail");
         exit(1);
