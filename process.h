@@ -1,6 +1,7 @@
 #ifndef PROCESS_H
 #define PROCESS_H
 
+#define _GNU_SOURCE
 #include <sys/types.h>
 #include <stdbool.h>
 
