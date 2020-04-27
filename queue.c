@@ -62,7 +62,7 @@ bool emptyQueue(processQueue readyQueue){
 // pull the first process in the queue
 processInfo* pullQueue(processQueue* readyQueue){
     processInfo* temprocess = readyQueue->processes[readyQueue->out];
-    readyQueue->out = (readyQueue->out + 1) % maxNum ;
+    readyQueue->out = (readyQueue->out + 1) % readyQueue->maxNum ;
     --readyQueue->num                               ;
 
     return temprocess;
@@ -71,7 +71,7 @@ processInfo* pullQueue(processQueue* readyQueue){
 // recursively push back all the process until inserIndex reach the queue's in
 // which mean no other should be push back
 void pushBackAll(processQueue* readyQueue, processInfo* ready, int insertIndex){
-    processes* tmpprocess = readyQueue->processes[insertIndex] ;
+    processInfo* tmpprocess = readyQueue->processes[insertIndex] ;
     readyQueue->processes[insertIndex] = ready ;
     insertIndex = (insertIndex + 1) % readyQueue->maxNum ;
     pushBackAll(readyQueue, tmpprocess, insertIndex) ;
