@@ -5,10 +5,10 @@
 #include "queue.h"
 #include <stdbool.h>
 
-#define FIFO 0;
-#define RR   1;
-#define SJF  2;
-#define PSJF 3;
+#define FIFO 0
+#define RR   1
+#define SJF  2
+#define PSJF 3
 
 
 // set of priority number

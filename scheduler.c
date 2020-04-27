@@ -71,8 +71,8 @@ void readProcess(){
 
 // compare the ready time and sort the process list
 int compare(const void* a, const void* b){
-    if(((struct process*)a)->ready_time < ((struct process*)b)->ready_time) return -1;
-    else if(((struct process*)a)->ready_time == ((struct process*)b)->ready_time) return 0;
+    if(((processInfo* )a)->ready_time < ((processInfo*)b)->ready_time) return -1;
+    else if(((processInfo*)a)->ready_time == ((processInfo*)b)->ready_time) return 0;
     else return 1;
 }
 
@@ -92,7 +92,7 @@ void load_queue(){
 
 
 void handleRR(processQueue* readyQueue, processInfo* process){
-    if(!pushQueue(readyQueue, process){
+    if(!pushQueue(readyQueue, process)){
         perror("ready queue out of bound");
         exit(1);
     }
@@ -104,7 +104,7 @@ void handleRR(processQueue* readyQueue, processInfo* process){
 }
 
 void handlePSJF(processQueue* readyQueue, processInfo* process){
-    if(!insertQueue(readyQueue, process){
+    if(!insertQueue(readyQueue, process)){
         perror("ready queue out of bound");
         exit(1);
     }
@@ -122,7 +122,7 @@ void handlePSJF(processQueue* readyQueue, processInfo* process){
 void scheduler(){
 
     // sort the process list
-    qsort(processList, processNum, sizeof(struct process), compare);
+    qsort(processList, processNum, sizeof(processInfo), compare);
 
     // init the ready queue
     load_queue();
@@ -148,7 +148,7 @@ void scheduler(){
         // check if ntime reach for any process's ready time
         for(int i = finishNum; i < processNum; i++){
             if (processList[i].ready_time == ntime){
-                if(policy == SJF || policy == PSJF){
+                if(algorithm == SJF || algorithm == PSJF){
                     if(!insertQueue(&readyQueue, &processList[i])){
                         perror("ready queue out of bound");
                         exit(1);
@@ -162,8 +162,7 @@ void scheduler(){
                 }
                 
 #ifdef DEBUG
-                fprintf(stderr, "%s is getting into the ready
-                                queue at time %d.\n", processList[i].name, ntime);
+                fprintf(stderr, "%s is getting into the ready queue at time %d.\n", processList[i].name, ntime);
 #endif
             }
         }
@@ -181,14 +180,14 @@ void scheduler(){
 
             // if policy is RR then should check the time slice
             // and let the handleRR handle it HAHA~
-            else if(policy == RR && ntime%500 == 0){
+            else if(algorithm == RR && ntime%500 == 0){
                 handleRR(runningProcess, &readyQueue);
                 runningProcess = 0 ;
             }
 
             // if policy is PSJF then should check if the process
             // is to be preempted
-            else if(policy == PSJF && isPreempt(&readyQueue, runningProcess)){
+            else if(algorithm == PSJF && isPreempt(&readyQueue, runningProcess)){
                 handlePSJF(runningProcess, &readyQueue);
                 runningProcess = 0 ;
             }

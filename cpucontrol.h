@@ -6,8 +6,8 @@
 #include <unistd.h>
 #include <stdio.h>
 
-#define PARENT_CPU 0;
-#define CHILD_CPU  1;
+#define PARENT_CPU 0
+#define CHILD_CPU  1
 
 // set of priority number
 #define PRIORITY_INIT (int)50
