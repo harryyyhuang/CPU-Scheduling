@@ -2,6 +2,7 @@
 #define PROCESS_H
 
 #include <sys/types.h>
+#include <stdbool.h>
 
 typedef struct processInfo
 {

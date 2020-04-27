@@ -3,6 +3,7 @@
 
 #include "process.h"
 #include "queue.h"
+#include <stdbool.h>
 
 #define FIFO 0;
 #define RR   1;

@@ -2,6 +2,7 @@
 #define QUEUE_H
 
 #include "process.h"
+#include <stdbool.h>
 
 typedef struct processQueue
 {
