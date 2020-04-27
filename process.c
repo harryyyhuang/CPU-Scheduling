@@ -53,16 +53,10 @@ void execprocess(struct processInfo* runningProcess){
 
 // stop the running process
 void posponeProcess(struct processInfo* process){
-    if(SET_PRIORITY(process->pid, SCHED_IDLE, 0) < 0){
-        perror("postpone process fail");
-        exit(1);
-    }
+    SET_PRIORITY(process->pid, SCHED_IDLE, 0) ;
 }
 
 // resume the process
 void resumeProcess(struct processInfo* process){
-    if(SET_PRIORITY(process->pid, SCHED_FIFO, PRIORITY_HIGH)) < 0){
-        perror("postpone process fail");
-        exit(1);
-    }
+    SET_PRIORITY(process->pid, SCHED_FIFO, PRIORITY_HIGH);
 }

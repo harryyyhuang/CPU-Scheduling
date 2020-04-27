@@ -4,6 +4,9 @@
 #include <sys/types.h>
 #include <stdbool.h>
 
+#define GET_TIME 351
+#define PRINTK   352
+
 typedef struct processInfo
 {
     char name[33];
