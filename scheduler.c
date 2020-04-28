@@ -79,7 +79,7 @@ int compare(const void* a, const void* b){
 // just to load the ready queue which simply use the function
 // in queue.h
 void load_queue(){
-    readyQueue = initQueue(processNum);
+    processQueue readyQueue = initQueue(processNum);
 }
 
 // handle the end of the process and choose the next
