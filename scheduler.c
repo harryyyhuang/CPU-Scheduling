@@ -32,19 +32,19 @@ void readFile(){
 
 // determine the scheduling algorithm strategy
 void determineAlgo(char* algoString){
-    if(strcmp(algoString, "FIFO")){
+    if(strcmp(algoString, "FIFO") == 0){
         algorithm = FIFO;
     }
 
-    else if(strcmp(algoString, "RR")){
+    else if(strcmp(algoString, "RR") == 0){
         algorithm = RR;
     }
 
-    else if(strcmp(algoString, "SJF")){
+    else if(strcmp(algoString, "SJF") == 0){
         algorithm = SJF;
     }
 
-    else if(strcmp(algoString, "PSJF")){
+    else if(strcmp(algoString, "PSJF") == 0){
         algorithm = PSJF;
     }
 #ifdef DEBUG
