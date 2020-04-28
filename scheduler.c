@@ -157,16 +157,10 @@ void scheduler(){
                 fprintf(stderr, "process %s is getting into ready queue at time %d.\n", processList[i].name, ntime);
 #endif
                 if(algorithm == SJF || algorithm == PSJF){
-#ifdef DEBUG
-                fprintf(stderr, "start!\n");
-#endif
                     if(!insertQueue(&readyQueue, &processList[i])){
                         perror("insert ready queue out of bound");
                         exit(1);
                     }
-#ifdef DEBUG
-                fprintf(stderr, "end!\n");
-#endif
                 }
                 else{
                     if(!pushQueue(&readyQueue, &processList[i])){
