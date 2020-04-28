@@ -108,15 +108,19 @@ void handleRR(processInfo* process){
 
 }
 
-void handlePSJF(processQueue* readyQueuepointer, processInfo* process){
-    if(!insertQueue(readyQueuepointer, process)){
+void handlePSJF(processInfo* process){
+    posponeProcess(process);
+#ifdef DEBUG
+    fprintf(stderr, "inserting %s process at time %d.\n", process->name, ntime);
+#endif
+    if(!insertQueue(&readyQueue, process)){
         perror("ready queue out of bound");
         exit(1);
     }
 #ifdef DEBUG
                 fprintf(stderr, "posponing %s process at time %d.\n", process->name, ntime);
 #endif
-    posponeProcess(process);
+    
 }
 
 
@@ -195,7 +199,7 @@ void scheduler(){
             // if policy is PSJF then should check if the process
             // is to be preempted
             else if(algorithm == PSJF && isPreempt(&readyQueue, runningProcess)){
-                handlePSJF(runningProcess, &readyQueue);
+                handlePSJF(runningProcess);
                 runningProcess = 0 ;
             }
         }
