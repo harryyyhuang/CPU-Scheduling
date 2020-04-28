@@ -16,9 +16,11 @@ int process_execute(struct processInfo* process){
         pid = getpid();
         long start_sec, start_nsec, end_sec, end_nsec;
         syscall(GET_TIME, &start_sec, &start_nsec);
+
 #ifdef DEBUG
-        fprintf(stderr, "kernel function is work as start_sec is %ld", start_sec);
+        fprintf(stderr, "kernel function is work as start_sec is %ld\n", start_sec);
 #endif
+
         for(int i = 0; i < process->execution_time; ++i ){
             UNIT_TIME();
         }
