@@ -152,6 +152,9 @@ void scheduler(){
         // check if ntime reach for any process's ready time
         for(int i = finishNum; i < processNum; i++){
             if (processList[i].ready_time == ntime){
+#ifdef DEBUG
+                fprintf(stderr, "process %s is getting into ready queue at time %d.\n", processList[i].name, ntime);
+#endif
                 if(algorithm == SJF || algorithm == PSJF){
                     if(!insertQueue(&readyQueue, &processList[i])){
                         perror("insert ready queue out of bound");
@@ -162,9 +165,6 @@ void scheduler(){
                     if(!pushQueue(&readyQueue, &processList[i])){
                         perror("push ready queue out of bound");
                         exit(1);
-#ifdef DEBUG
-                    fprintf(stderr, "pushing %s process at time %d.\n", processList[i].name, ntime);
-#endif
                     }
                 }
             }
