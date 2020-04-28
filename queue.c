@@ -34,9 +34,11 @@ bool insertQueue(processQueue* readyQueue, processInfo* ready){
         int insertIndex = readyQueue->out ;
         while (1)
         {
-#ifdef DEBUG
-                fprintf(stderr, "start!\n");
-#endif
+            if(insertIndex == readyQueue->in){
+                readyQueue->processes[insertIndex] = ready;
+                break;
+            }
+
             if(ready->execution_time < readyQueue->processes[insertIndex]->execution_time){
                 pushBackAll(readyQueue, ready, insertIndex);
                 break;
@@ -45,10 +47,7 @@ bool insertQueue(processQueue* readyQueue, processInfo* ready){
                 insertIndex = (insertIndex + 1) % readyQueue->maxNum ;
             }
 
-            if(insertIndex == readyQueue->in){
-                readyQueue->processes[insertIndex] = ready;
-                break;
-            }
+            
         }
         readyQueue->in = (readyQueue->in + 1) % readyQueue->maxNum ;
         ++readyQueue->num                    ;
