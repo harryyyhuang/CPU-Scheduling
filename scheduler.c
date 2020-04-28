@@ -92,17 +92,18 @@ void load_queue(){
 
 
 void handleRR(processQueue* readyQueuepointer, processInfo* process){
+    posponeProcess(process);
+#ifdef DEBUG
+    fprintf(stderr, "pushing %s process at time %d.\n", process->name, ntime);
+#endif
     if(!pushQueue(readyQueuepointer, process)){
         perror("ready queue out of bound");
         exit(1);
     }
 #ifdef DEBUG
-    fprintf(stderr, "pushing %s process at time %d.\n", process->name, ntime);
-#endif
-#ifdef DEBUG
     fprintf(stderr, "posponing %s process at time %d.\n", process->name, ntime);
 #endif
-    posponeProcess(process);
+    
 
 }
 
