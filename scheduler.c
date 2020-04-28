@@ -91,8 +91,8 @@ void load_queue(){
 // }
 
 
-void handleRR(processQueue* readyQueue, processInfo* process){
-    if(!pushQueue(readyQueue, process)){
+void handleRR(processQueue* readyQueuepointer, processInfo* process){
+    if(!pushQueue(readyQueuepointer, process)){
         perror("ready queue out of bound");
         exit(1);
     }
@@ -103,8 +103,8 @@ void handleRR(processQueue* readyQueue, processInfo* process){
 
 }
 
-void handlePSJF(processQueue* readyQueue, processInfo* process){
-    if(!insertQueue(readyQueue, process)){
+void handlePSJF(processQueue* readyQueuepointer, processInfo* process){
+    if(!insertQueue(readyQueuepointer, process)){
         perror("ready queue out of bound");
         exit(1);
     }
