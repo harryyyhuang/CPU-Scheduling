@@ -78,9 +78,9 @@ int compare(const void* a, const void* b){
 
 // just to load the ready queue which simply use the function
 // in queue.h
-// void load_queue(){
-    
-// }
+void load_queue(){
+    readyQueue = initQueue(processNum);
+}
 
 // handle the end of the process and choose the next
 // thing to do for each scheduling policy
@@ -125,7 +125,7 @@ void scheduler(){
     qsort(processList, processNum, sizeof(processInfo), compare);
 
     // init the ready queue
-    readyQueue = initQueue(processNum);
+    load_queue();
 
     // set the scheduler process to parent cpu
     SET_CPU(getpid(), PARENT_CPU);
@@ -196,7 +196,7 @@ void scheduler(){
         // if process hasn't been fork then fork it
         // if process had been postponed then resume it
         if(!runningProcess){
-            if(!emptyQueue(readyQueue)){
+            if(!emptyQueue(&readyQueue)){
                 processInfo* toExecProcess = pullQueue(&readyQueue);
                 if(toExecProcess->pid == -1){
                     toExecProcess->pid = process_execute(toExecProcess);

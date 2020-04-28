@@ -60,8 +60,8 @@ bool insertQueue(processQueue* readyQueue, processInfo* ready){
 }
 
 // return true if the queue's num is zero
-bool emptyQueue(processQueue readyQueue){
-    if(readyQueue.num == 0) return true;
+bool emptyQueue(processQueue* readyQueue){
+    if(readyQueue->num == 0) return true;
     return false;
 }
 

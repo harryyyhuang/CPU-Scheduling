@@ -21,7 +21,7 @@ bool pushQueue(processQueue* readyQueue, processInfo* ready);
 bool insertQueue(processQueue* readyQueue, processInfo* ready);
 
 // boolean to check if queue is empty
-bool emptyQueue(processQueue readyQueue);
+bool emptyQueue(processQueue* readyQueue);
 
 // pull out the process 
 processInfo* pullQueue(processQueue* readyQueue);
