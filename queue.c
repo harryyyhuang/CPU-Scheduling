@@ -19,14 +19,10 @@ processQueue initQueue(int ProcNum){
 
 // push the process into the ready queue for execution
 bool pushQueue(processQueue* readyQueue, processInfo* ready){
-#ifdef DEBUG
-    fprintf(stderr, "wrong at %s\n", ready->name);
-#endif
     if(readyQueue->num < readyQueue->maxNum){
         readyQueue->processes[readyQueue->in] = ready ;
         readyQueue->in = (readyQueue->in + 1) % readyQueue->maxNum ;
         ++readyQueue->num                    ;
-
         return true;
     }
     else return false;

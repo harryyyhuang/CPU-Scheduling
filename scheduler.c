@@ -97,7 +97,10 @@ void handleRR(processQueue* readyQueuepointer, processInfo* process){
         exit(1);
     }
 #ifdef DEBUG
-                fprintf(stderr, "posponing %s process at time %d.\n", process->name, ntime);
+    fprintf(stderr, "pushing %s process at time %d.\n", process->name, ntime);
+#endif
+#ifdef DEBUG
+    fprintf(stderr, "posponing %s process at time %d.\n", process->name, ntime);
 #endif
     posponeProcess(process);
 
@@ -148,9 +151,6 @@ void scheduler(){
         // check if ntime reach for any process's ready time
         for(int i = finishNum; i < processNum; i++){
             if (processList[i].ready_time == ntime){
-#ifdef DEBUG
-                fprintf(stderr, "%s is getting into the ready queue at time %d.\n", processList[i].name, ntime);
-#endif
                 if(algorithm == SJF || algorithm == PSJF){
                     if(!insertQueue(&readyQueue, &processList[i])){
                         perror("insert ready queue out of bound");
@@ -161,6 +161,9 @@ void scheduler(){
                     if(!pushQueue(&readyQueue, &processList[i])){
                         perror("push ready queue out of bound");
                         exit(1);
+#ifdef DEBUG
+                    fprintf(stderr, "pushing %s process at time %d.\n", process->name, ntime);
+#endif
                     }
                 }
             }
