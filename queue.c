@@ -1,5 +1,6 @@
 #include "queue.h"
 #include "process.h"
+#include <stdio.h>
 
 
 // dynamclly allocate the process queue list set the max number 
