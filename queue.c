@@ -12,6 +12,8 @@ processQueue initQueue(int ProcNum){
     QueueInit.in        = 0          ;
     QueueInit.out       = 0          ;
     QueueInit.num       = 0          ;
+
+    return QueueInit;
 }
 
 // push the process into the ready queue for execution

@@ -12,7 +12,7 @@
 // read the whole file of the input 
 void readFile(){
 #ifdef DEBUG
-            fprintf(stderr, "start reading the file");
+            fprintf(stderr, "start reading the file\n");
 #endif
 
     char algo[5];
@@ -26,7 +26,7 @@ void readFile(){
     
 
 #ifdef DEBUG
-            fprintf(stderr, "end reading the file");
+            fprintf(stderr, "end reading the file\n");
 #endif
 }
 
@@ -56,7 +56,7 @@ void determineAlgo(char* algoString){
 // created
 void readProcess(){
 #ifdef DEBUG
-                fprintf(stderr, "start reading the process");
+                fprintf(stderr, "start reading the process\n");
 #endif
     for(int i = 0; i < processNum; ++i){
         scanf("%s", processList[i].name);
@@ -65,7 +65,7 @@ void readProcess(){
         processList[i].pid = -1;
     }
 #ifdef DEBUG
-                fprintf(stderr, "end reading the process");
+                fprintf(stderr, "end reading the process\n");
 #endif
 }
 
@@ -150,13 +150,13 @@ void scheduler(){
             if (processList[i].ready_time == ntime){
                 if(algorithm == SJF || algorithm == PSJF){
                     if(!insertQueue(&readyQueue, &processList[i])){
-                        perror("ready queue out of bound");
+                        perror("insert ready queue out of bound");
                         exit(1);
                     }
                 }
                 else{
                     if(!pushQueue(&readyQueue, &processList[i])){
-                        perror("ready queue out of bound");
+                        perror("push ready queue out of bound");
                         exit(1);
                     }
                 }
