@@ -19,6 +19,9 @@ processQueue initQueue(int ProcNum){
 
 // push the process into the ready queue for execution
 bool pushQueue(processQueue* readyQueue, processInfo* ready){
+#ifdef DEBUG
+    fprintf(stderr, "check if it's the same readyQueue %p\n", (void*)readyQueue);
+#endif
     if(readyQueue->num < readyQueue->maxNum){
         readyQueue->processes[readyQueue->in] = ready ;
         readyQueue->in = (readyQueue->in + 1) % readyQueue->maxNum ;
@@ -58,9 +61,6 @@ bool insertQueue(processQueue* readyQueue, processInfo* ready){
 
 // return true if the queue's num is zero
 bool emptyQueue(processQueue readyQueue){
-#ifdef DEBUG
-    fprintf(stderr, "current number is %d, max number is %d\n", readyQueue.num, readyQueue.maxNum);
-#endif
     if(readyQueue.num == 0) return true;
     return false;
 }
@@ -70,10 +70,6 @@ processInfo* pullQueue(processQueue* readyQueue){
     processInfo* temprocess = readyQueue->processes[readyQueue->out];
     readyQueue->out = (readyQueue->out + 1) % readyQueue->maxNum ;
     --readyQueue->num                               ;
-#ifdef DEBUG
-    fprintf(stderr, "current number is %d, max number is %d\n", readyQueue->num, readyQueue->maxNum);
-#endif
-
     return temprocess;
 }
 
