@@ -162,7 +162,7 @@ void scheduler(){
                         perror("push ready queue out of bound");
                         exit(1);
 #ifdef DEBUG
-                    fprintf(stderr, "pushing %s process at time %d.\n", process->name, ntime);
+                    fprintf(stderr, "pushing %s process at time %d.\n", processList[i].name, ntime);
 #endif
                     }
                 }
