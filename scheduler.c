@@ -48,6 +48,7 @@ void determineAlgo(char* algoString){
         algorithm = PSJF;
     }
 #ifdef DEBUG
+    fprintf(stderr, "the scheduler is %s\n", algoString);
     fprintf(stderr, "the scheduler is %d\n", algorithm);
 #endif
 }
