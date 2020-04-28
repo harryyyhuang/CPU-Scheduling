@@ -176,6 +176,9 @@ void scheduler(){
             // check if current running process finish
             if(processEnd(runningProcess)){
                 waitpid(runningProcess->pid, NULL, 0);
+#ifdef DEBUG
+                fprintf(stderr, "process %s end at time %d.\n", runningProcess->name, ntime);
+#endif
                 runningProcess = 0;
                 ++finishNum;
 
