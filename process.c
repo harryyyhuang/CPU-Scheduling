@@ -28,7 +28,7 @@ int process_execute(struct processInfo* process){
 #endif
         }
         syscall(GET_TIME, &end_sec, &end_nsec);
-
+        printf("in here after is %s %d\n", process->name, process->pid);
         syscall(PRINTK, pid, start_sec, start_nsec, end_sec, end_nsec);
 
 
