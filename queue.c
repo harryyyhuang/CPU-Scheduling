@@ -20,10 +20,7 @@ processQueue initQueue(int ProcNum){
 // push the process into the ready queue for execution
 bool pushQueue(processQueue* readyQueue, processInfo* ready){
 #ifdef DEBUG
-    fprintf(stderr, "check if it's the same readyQueue %p\n", (void*)readyQueue);
-#endif
-#ifdef DEBUG
-    fprintf(stderr, "check if it's the same readyProcess %p\n", (void*)ready);
+    fprintf(stderr, "wrong at %s\n", ready->name);
 #endif
     if(readyQueue->num < readyQueue->maxNum){
         readyQueue->processes[readyQueue->in] = ready ;

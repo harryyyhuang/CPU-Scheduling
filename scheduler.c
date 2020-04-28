@@ -79,11 +79,7 @@ int compare(const void* a, const void* b){
 // just to load the ready queue which simply use the function
 // in queue.h
 void load_queue(){
-    readyQueue.processes = (struct processInfo**)malloc(processNum * sizeof(struct  processInfo*));
-    readyQueue.maxNum    = processNum    ;
-    readyQueue.in        = 0             ;
-    readyQueue.out       = 0             ;
-    readyQueue.num       = 0             ;
+    readyQueue = initQueue(processNum);
 }
 
 // handle the end of the process and choose the next
