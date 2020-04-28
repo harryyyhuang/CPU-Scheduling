@@ -184,7 +184,7 @@ void scheduler(){
             // if policy is RR then should check the time slice
             // and let the handleRR handle it HAHA~
             else if(algorithm == RR && ntime%500 == 0){
-                handleRR(&readyQueue);
+                handleRR(runningProcess);
                 runningProcess = 0 ;
             }
 
