@@ -15,9 +15,9 @@ int process_execute(struct processInfo* process){
     if(pid == 0){
         pid = getpid();
         long start_sec, start_nsec, end_sec, end_nsec;
+        process->pid = pid;
+        printf("in here is %s %d\n", process->name, process->pid);
         syscall(GET_TIME, &start_sec, &start_nsec);
-
-
 
         for(int i = 0; i < process->execution_time; ++i ){
             UNIT_TIME();
@@ -39,8 +39,6 @@ int process_execute(struct processInfo* process){
     else{
         // set the child process cpu and priority
         SET_CPU(pid, CHILD_CPU);
-        
-
         SET_PRIORITY(pid, SCHED_FIFO, PRIORITY_INIT);
     }
 
