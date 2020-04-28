@@ -70,6 +70,9 @@ processInfo* pullQueue(processQueue* readyQueue){
     processInfo* temprocess = readyQueue->processes[readyQueue->out];
     readyQueue->out = (readyQueue->out + 1) % readyQueue->maxNum ;
     --readyQueue->num                               ;
+#ifdef DEBUG
+    fprintf(stderr, "current number is %d, max number is %d\n", readyQueue->num, readyQueue->maxNum);
+#endif
 
     return temprocess;
 }
