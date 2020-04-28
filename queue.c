@@ -40,9 +40,6 @@ bool insertQueue(processQueue* readyQueue, processInfo* ready){
             }
 
             if(ready->execution_time < readyQueue->processes[insertIndex]->execution_time){
-#ifdef DEBUG
-                fprintf(stderr, "should be here\n");
-#endif
                 pushBackAll(readyQueue, ready, insertIndex);
                 break;
             }
@@ -77,11 +74,14 @@ processInfo* pullQueue(processQueue* readyQueue){
 // recursively push back all the process until inserIndex reach the queue's in
 // which mean no other should be push back
 void pushBackAll(processQueue* readyQueue, processInfo* ready, int insertIndex){
+    if(insertIndex == readyQueue->in){
+        readyQueue->processes[insertIndex] = ready ;
+        return;
+    }
     processInfo* tmpprocess = readyQueue->processes[insertIndex] ;
     readyQueue->processes[insertIndex] = ready ;
     insertIndex = (insertIndex + 1) % readyQueue->maxNum ;
     pushBackAll(readyQueue, tmpprocess, insertIndex) ;
-    if(insertIndex == readyQueue->in) return ;
 }
 
 // check if the running process should be preempt by checking the queue's
