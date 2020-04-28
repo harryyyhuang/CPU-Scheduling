@@ -32,9 +32,6 @@ bool pushQueue(processQueue* readyQueue, processInfo* ready){
 bool insertQueue(processQueue* readyQueue, processInfo* ready){
     if(readyQueue->num < readyQueue->maxNum){
         int insertIndex = readyQueue->out ;
-#ifdef DEBUG
-                fprintf(stderr, "start!\n");
-#endif
         while (1)
         {
             if(ready->execution_time < readyQueue->processes[insertIndex]->execution_time){
@@ -75,6 +72,9 @@ processInfo* pullQueue(processQueue* readyQueue){
 // recursively push back all the process until inserIndex reach the queue's in
 // which mean no other should be push back
 void pushBackAll(processQueue* readyQueue, processInfo* ready, int insertIndex){
+#ifdef DEBUG
+                fprintf(stderr, "start!\n");
+#endif
     processInfo* tmpprocess = readyQueue->processes[insertIndex] ;
     readyQueue->processes[insertIndex] = ready ;
     insertIndex = (insertIndex + 1) % readyQueue->maxNum ;
