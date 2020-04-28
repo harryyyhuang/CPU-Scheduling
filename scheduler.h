@@ -57,6 +57,6 @@ void load_queue();
 void handleRR(processInfo* process);
 
 // function for handling the PSJF policy
-void handlePSJF(processQueue* readyQueue, processInfo* process);
+void handlePSJF(processInfo* process);
 
 #endif
