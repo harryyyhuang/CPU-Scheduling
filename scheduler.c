@@ -201,6 +201,7 @@ void scheduler(){
                 processInfo* toExecProcess = pullQueue(&readyQueue);
                 if(toExecProcess->pid == -1){
                     toExecProcess->pid = process_execute(toExecProcess);
+                    printf("%s %d\n", toExecProcess->name, toExecProcess->pid);
                 }
                 else{
                     resumeProcess(toExecProcess);

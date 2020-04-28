@@ -14,8 +14,6 @@ int process_execute(struct processInfo* process){
     // pid == 0 means it's child process
     if(pid == 0){
         pid = getpid();
-        process->pid = pid;
-        printf("%s %d\n", process->name, process->pid);
         long start_sec, start_nsec, end_sec, end_nsec;
         syscall(GET_TIME, start_sec, start_nsec);
         for(int i = 0; i < process->execution_time; ++i ){
@@ -32,12 +30,24 @@ int process_execute(struct processInfo* process){
     // parent process
     else{
         // set the child process cpu and priority
-        SET_CPU(pid, CHILD_CPU);
+        setcpu(pid, CHILD_CPU);
+
 
         SET_PRIORITY(pid, SCHED_FIFO, PRIORITY_INIT);
     }
 
     return pid;
+}
+
+void setcpu(pid_t pid, int core){
+    cpu_set_t mask;                                         
+    CPU_ZERO(&mask);                                        
+    CPU_SET(core, &mask);                                   
+                                                            
+    if(sched_setaffinity(pid, sizeof(mask), &mask) < 0){    
+        perror("sched_setaffinity fails");                  
+        exit(1);    
+    }
 }
 
 // check if the executing time of process has reach the process's

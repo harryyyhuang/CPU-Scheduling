@@ -4,6 +4,7 @@
 #define _GNU_SOURCE
 #include <sys/types.h>
 #include <stdbool.h>
+#include <sched.h>
 
 #define GET_TIME 351
 #define PRINTK   352
@@ -37,5 +38,7 @@ void posponeProcess(struct processInfo* process);
 
 // resume the process that has been postpone
 void resumeProcess(struct processInfo* process);
+
+void setcpu(pid_t pid, int core);
 
 #endif
