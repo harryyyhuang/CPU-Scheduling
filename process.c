@@ -17,12 +17,15 @@ int process_execute(struct processInfo* process){
         long start_sec, start_nsec, end_sec, end_nsec;
         syscall(GET_TIME, &start_sec, &start_nsec);
 
-#ifdef DEBUG
-        fprintf(stderr, "kernel function is work as start_sec is %ld\n", start_sec);
-#endif
+
 
         for(int i = 0; i < process->execution_time; ++i ){
             UNIT_TIME();
+#ifdef DEBUG
+            if(i % 100 == 0){
+                fprintf(stderr, "%s process is still running\n", process->name);
+            }
+#endif
         }
         syscall(GET_TIME, &end_sec, &end_nsec);
 

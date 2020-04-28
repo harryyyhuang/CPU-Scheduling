@@ -47,10 +47,6 @@ void determineAlgo(char* algoString){
     else if(strcmp(algoString, "PSJF") == 0){
         algorithm = PSJF;
     }
-#ifdef DEBUG
-    fprintf(stderr, "the scheduler is %s\n", algoString);
-    fprintf(stderr, "the scheduler is %d\n", algorithm);
-#endif
 }
 
 // read the process name, ready time and 
