@@ -88,7 +88,7 @@ void pushBackAll(processQueue* readyQueue, processInfo* ready, int insertIndex){
 // execution time then it should be preempt. if queue is empty then 
 // there's noting to preempt
 bool isPreempt(processQueue* readyQueue, processInfo* runningProcess){
-    if(emptyQueue(*readyQueue)) return false ;
+    if(emptyQueue(readyQueue)) return false ;
 
     if(readyQueue->processes[readyQueue->out]->execution_time < runningProcess->execution_time) return true;
 
