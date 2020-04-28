@@ -40,6 +40,9 @@ bool insertQueue(processQueue* readyQueue, processInfo* ready){
             }
 
             if(ready->execution_time < readyQueue->processes[insertIndex]->execution_time){
+#ifdef DEBUG
+                fprintf(stderr, "should be here\n");
+#endif
                 pushBackAll(readyQueue, ready, insertIndex);
                 break;
             }
