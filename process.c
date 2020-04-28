@@ -15,14 +15,14 @@ int process_execute(struct processInfo* process){
     if(pid == 0){
         pid = getpid();
         long start_sec, start_nsec, end_sec, end_nsec;
-        syscall(GET_TIME, start_sec, start_nsec);
+        syscall(GET_TIME, &start_sec, &start_nsec);
 #ifdef DEBUG
         fprintf(stderr, "kernel function is work as start_sec is %ld", start_sec);
 #endif
         for(int i = 0; i < process->execution_time; ++i ){
             UNIT_TIME();
         }
-        syscall(GET_TIME, end_sec, end_nsec);
+        syscall(GET_TIME, &end_sec, &end_nsec);
 
         syscall(PRINTK, pid, start_sec, start_nsec, end_sec, end_nsec);
 
