@@ -54,7 +54,7 @@ int compare();
 void load_queue();
 
 // function for handling the RR policy
-void handleRR(processQueue* readyQueue, processInfo* process);
+void handleRR(processInfo* process);
 
 // function for handling the PSJF policy
 void handlePSJF(processQueue* readyQueue, processInfo* process);

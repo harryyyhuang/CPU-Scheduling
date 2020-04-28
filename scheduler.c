@@ -91,12 +91,12 @@ void load_queue(){
 // }
 
 
-void handleRR(processQueue* readyQueuepointer, processInfo* process){
+void handleRR(processInfo* process){
     posponeProcess(process);
 #ifdef DEBUG
     fprintf(stderr, "pushing %s process at time %d.\n", process->name, ntime);
 #endif
-    if(!pushQueue(readyQueuepointer, process)){
+    if(!pushQueue(&readyQueue, process)){
         perror("ready queue out of bound");
         exit(1);
     }
@@ -184,7 +184,7 @@ void scheduler(){
             // if policy is RR then should check the time slice
             // and let the handleRR handle it HAHA~
             else if(algorithm == RR && ntime%500 == 0){
-                handleRR(runningProcess, &readyQueue);
+                handleRR(&readyQueue);
                 runningProcess = 0 ;
             }
 
