@@ -78,9 +78,9 @@ int compare(const void* a, const void* b){
 
 // just to load the ready queue which simply use the function
 // in queue.h
-void load_queue(){
-    processQueue readyQueue = initQueue(processNum);
-}
+// void load_queue(){
+    
+// }
 
 // handle the end of the process and choose the next
 // thing to do for each scheduling policy
@@ -125,7 +125,7 @@ void scheduler(){
     qsort(processList, processNum, sizeof(processInfo), compare);
 
     // init the ready queue
-    load_queue();
+    readyQueue = initQueue(processNum);
 
     // set the scheduler process to parent cpu
     SET_CPU(getpid(), PARENT_CPU);
