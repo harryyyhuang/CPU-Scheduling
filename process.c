@@ -30,24 +30,13 @@ int process_execute(struct processInfo* process){
     // parent process
     else{
         // set the child process cpu and priority
-        setcpu(pid, CHILD_CPU);
-
+        SET_CPU(pid, CHILD_CPU);
+        
 
         SET_PRIORITY(pid, SCHED_FIFO, PRIORITY_INIT);
     }
 
     return pid;
-}
-
-void setcpu(pid_t pid, int core){
-    cpu_set_t mask;                                         
-    CPU_ZERO(&mask);                                        
-    CPU_SET(core, &mask);                                   
-                                                            
-    if(sched_setaffinity(pid, sizeof(mask), &mask) < 0){    
-        perror("sched_setaffinity fails");                  
-        exit(1);    
-    }
 }
 
 // check if the executing time of process has reach the process's

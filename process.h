@@ -39,6 +39,5 @@ void posponeProcess(struct processInfo* process);
 // resume the process that has been postpone
 void resumeProcess(struct processInfo* process);
 
-void setcpu(pid_t pid, int core);
 
 #endif
