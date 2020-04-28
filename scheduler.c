@@ -62,6 +62,7 @@ void readProcess(){
         scanf("%s", processList[i].name);
         scanf("%d", &processList[i].ready_time);
         scanf("%d", &processList[i].execution_time);
+        processList[i].origin_execution_time = processList[i].execution_time;
         processList[i].pid = -1;
     }
 #ifdef DEBUG
@@ -183,7 +184,7 @@ void scheduler(){
 
             // if policy is RR then should check the time slice
             // and let the handleRR handle it HAHA~
-            else if(algorithm == RR && ntime%500 == 0){
+            else if(algorithm == RR && getRunningTime(runningProcess)%500 == 0){
                 handleRR(runningProcess);
                 runningProcess = 0 ;
             }

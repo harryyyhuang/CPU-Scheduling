@@ -14,6 +14,7 @@ typedef struct processInfo
     char name[33];
     int  ready_time   ;
     int  execution_time;
+    int  origin_execution_time;
     pid_t pid    ;
 }processInfo;
 
@@ -38,6 +39,9 @@ void posponeProcess(struct processInfo* process);
 
 // resume the process that has been postpone
 void resumeProcess(struct processInfo* process);
+
+// get how long a process has already run
+int getRunningTime(struct processInfo* process);
 
 
 #endif

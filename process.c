@@ -69,3 +69,8 @@ void posponeProcess(struct processInfo* process){
 void resumeProcess(struct processInfo* process){
     SET_PRIORITY(process->pid, SCHED_FIFO, PRIORITY_HIGH);
 }
+
+// origin execution time minus execution time to get how long a process has run
+int getRunningTime(struct processInfo* process){
+    return process->origin_execution_time - process->execution_time ;
+}
