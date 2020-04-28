@@ -22,6 +22,9 @@ bool pushQueue(processQueue* readyQueue, processInfo* ready){
 #ifdef DEBUG
     fprintf(stderr, "check if it's the same readyQueue %p\n", (void*)readyQueue);
 #endif
+#ifdef DEBUG
+    fprintf(stderr, "check if it's the same readyProcess %p\n", (void*)ready);
+#endif
     if(readyQueue->num < readyQueue->maxNum){
         readyQueue->processes[readyQueue->in] = ready ;
         readyQueue->in = (readyQueue->in + 1) % readyQueue->maxNum ;
