@@ -183,6 +183,7 @@ void scheduler(){
 #ifdef DEBUG
                 fprintf(stderr, "process %s end at time %d.\n", runningProcess->name, ntime);
 #endif
+                printf("%s %d\n", runningProcess->name, runningProcess->pid);
                 runningProcess = 0;
                 ++finishNum;
 
@@ -212,7 +213,6 @@ void scheduler(){
                 processInfo* toExecProcess = pullQueue(&readyQueue);
                 if(toExecProcess->pid == -1){
                     toExecProcess->pid = process_execute(toExecProcess);
-                    printf("%s %d\n", toExecProcess->name, toExecProcess->pid);
                 }
                 else{
                     resumeProcess(toExecProcess);
