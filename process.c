@@ -16,7 +16,6 @@ int process_execute(struct processInfo* process){
         pid = getpid();
         long start_sec, start_nsec, end_sec, end_nsec;
         process->pid = pid;
-        printf("in here is %s %d\n", process->name, process->pid);
         syscall(GET_TIME, &start_sec, &start_nsec);
 
         for(int i = 0; i < process->execution_time; ++i ){
@@ -30,7 +29,7 @@ int process_execute(struct processInfo* process){
         syscall(GET_TIME, &end_sec, &end_nsec);
 
         syscall(PRINTK, pid, start_sec, start_nsec, end_sec, end_nsec);
-        printf("in here after is %s %d\n", process->name, process->pid);
+     
         
         exit(0);
     }
