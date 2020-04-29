@@ -213,6 +213,7 @@ void scheduler(){
                 if(toExecProcess->pid == -1){
                     toExecProcess->pid = process_execute(toExecProcess);
                     fprintf(stdout, "%s %d\n", toExecProcess->name, toExecProcess->pid);
+					fflush(stdout);
                 }
                 else{
                     resumeProcess(toExecProcess);
