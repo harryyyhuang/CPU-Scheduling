@@ -1,7 +1,7 @@
 FLAG = -DDEBUG -Wall -g -std=c99
 
-main: main.o scheduler.o process.o queue.o
-	gcc $(FLAG) main.o scheduler.o process.o queue.o
+all: main.o scheduler.o process.o queue.o
+	gcc $(FLAG) main.o scheduler.o process.o queue.o -o project1
 
 main.o: main.c Makefile
 	gcc $(FLAG) main.c -c
